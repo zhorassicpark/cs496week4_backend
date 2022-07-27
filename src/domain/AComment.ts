@@ -16,10 +16,10 @@ export class AComment extends BaseEntity{
   
   //   Many To One References
   @ManyToOne(type => Answer, answer => answer.aComments)
-  @JoinColumn({name: 'ref_userId'})
+  @JoinColumn({name: 'ref_answerId'})
   answer : Answer;
   @ManyToOne(type => User, user => user.aComments)
-  @JoinColumn({name: 'ref_answerId'})
+  @JoinColumn({name: 'ref_userId'})
   user: User;
 
 }

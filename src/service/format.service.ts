@@ -242,7 +242,7 @@ export class FormatService {
     return qCommentDto;
   }
   
-  async qCommentListToqCommentDtoList(qCommentList: QComment[]):Promise<QCommentDto[]>{
+  async qCommentListToQCommentDtoList(qCommentList: QComment[]):Promise<QCommentDto[]>{
     const qCommentDtoList:QCommentDto[] = [];
     for(let el of qCommentList){
       qCommentDtoList.push({

@@ -16,10 +16,10 @@ export class QComment extends BaseEntity{
   
   //   Many To One References
   @ManyToOne(type => Question, question => question.qComments)
-  @JoinColumn({name: 'ref_userId'})
+  @JoinColumn({name: 'ref_questionId'})
   question: Question;
   @ManyToOne(type => User, user => user.qComments)
-  @JoinColumn({name: 'ref_questionId'})
+  @JoinColumn({name: 'ref_userId'})
   user: User;
 
 }
