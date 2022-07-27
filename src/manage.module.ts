@@ -13,11 +13,12 @@ import { AnswerService } from './service/answer.service';
 import { QCommentService } from './service/qComment.service';
 import { ACommentService } from './service/aComment.service';
 import { FormatService } from './service/format.service';
+import { AnswerController } from './controller/answer.controller';
 // import { SpendController } from './controller/spend.controller';
 
 @Module({
   imports: [TypeOrmModule.forFeature([User, Question, Answer, QComment, AComment])],
-  controllers: [UserController, QuestionController],
+  controllers: [UserController, QuestionController, AnswerController],
   providers: [UserService, QuestionService, AnswerService, QCommentService, ACommentService, FormatService],
 })
 export class ManageModule {}
