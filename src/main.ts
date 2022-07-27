@@ -10,6 +10,7 @@ async function bootstrap() {
   app.setBaseViewsDir(join(__dirname, '..', 'views'));
   app.setViewEngine('hbs');
   app.useGlobalInterceptors(new AspectLogger());
+  app.enableCors();
   await app.listen(80);
 }
 bootstrap();
