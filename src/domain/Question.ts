@@ -2,6 +2,7 @@ import { group } from 'console';
 import { BaseEntity, Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryColumn, PrimaryGeneratedColumn, Unique } from 'typeorm/index';
 import { Answer } from './Answer';
 import { QComment } from './QComment';
+import { QLike } from './QLike';
 import { User } from './User';
 @Entity()
 
@@ -15,6 +16,8 @@ export class Question extends BaseEntity{
   content: string;
   @Column({ nullable:true })
   createdDate: Date;
+  @Column({ nullable:true })
+  numLike: number;
   
   //   Many To One References
   @ManyToOne(type => User, user => user.questions)
@@ -32,4 +35,9 @@ export class Question extends BaseEntity{
     eager: true
   })
   qComments: QComment[];
+  @OneToMany(type=>QLike, qLike => qLike.question, {
+    onDelete:'CASCADE',
+    eager: true
+  })
+  qLikes: QLike[];
 }

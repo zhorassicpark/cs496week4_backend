@@ -1,7 +1,9 @@
 import { BaseEntity, Column, Entity, OneToMany, PrimaryColumn, PrimaryGeneratedColumn, Unique } from 'typeorm/index';
 import { AComment } from './AComment';
+import { ALike } from './ALike';
 import { Answer } from './Answer';
 import { QComment } from './QComment';
+import { QLike } from './QLike';
 import { Question } from './Question';
 @Entity()
 
@@ -40,4 +42,14 @@ export class User extends BaseEntity{
     eager: true
   })
   aComments: AComment[];
+  @OneToMany(type=>QLike, qLike => qLike.user, {
+    onDelete:'CASCADE',
+    eager: true
+  })
+  qLikes: QLike[];
+  @OneToMany(type=>ALike, aLike => aLike.user, {
+    onDelete:'CASCADE',
+    eager: true
+  })
+  aLikes: ALike[];
 }

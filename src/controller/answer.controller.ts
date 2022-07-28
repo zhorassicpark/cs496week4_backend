@@ -99,8 +99,9 @@ export class AnswerController {
     }
     const questionsAnswerList = await this.answerService.findWithQuestionCondition(questionId);
     const questionsAnswerDtoList : AnswerDto[]= await this.formatService.answerListToAnswerDtoList(questionsAnswerList);
+    const sortedQuestionsAnswerDtoList:QuestionDto[] = questionsAnswerDtoList.sort((a, b)=> (a.numLike < b.numLike)?1:-1);
     const response =  Object.assign({
-      data: questionsAnswerDtoList,
+      data: sortedQuestionsAnswerDtoList,
       statusCode: 200,
       statusMsg: `질문에 대한 답변 목록이 성공적으로 조회되었습니다.`,
     });

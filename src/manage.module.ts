@@ -16,11 +16,16 @@ import { FormatService } from './service/format.service';
 import { AnswerController } from './controller/answer.controller';
 import { QCommentController } from './controller/qComment.controller';
 import { ACommentController } from './controller/aComment.controller';
+import { QLike } from './domain/QLike';
+import { ALike } from './domain/ALike';
+import { QLikeService } from './service/qLike.service';
+import { ALikeService } from './service/aLike.service';
+import { QALikeController } from './controller/qaLike.controller';
 // import { SpendController } from './controller/spend.controller';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([User, Question, Answer, QComment, AComment])],
-  controllers: [UserController, QuestionController, AnswerController,QCommentController, ACommentController],
-  providers: [UserService, QuestionService, AnswerService, QCommentService, ACommentService, FormatService],
+  imports: [TypeOrmModule.forFeature([User, Question, Answer, QComment, AComment,QLike, ALike])],
+  controllers: [UserController, QuestionController, AnswerController,QCommentController, ACommentController, QALikeController],
+  providers: [UserService, QuestionService, AnswerService, QCommentService, ACommentService, FormatService, QLikeService, ALikeService],
 })
 export class ManageModule {}

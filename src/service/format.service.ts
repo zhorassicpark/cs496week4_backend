@@ -56,6 +56,7 @@ export class FormatService {
       where:{
       id: userId
     } });
+    question.numLike = 0;
     return question;
   }
   
@@ -72,6 +73,7 @@ export class FormatService {
       where:{
       id: questionId
     } });
+    answer.numLike = 0;
     return answer;
   }
   
@@ -110,6 +112,8 @@ export class FormatService {
   }
   
   async questionListFilterWithSearchWord(questionDtoList:QuestionDto[], searchWord:string):Promise<QuestionDto[]>{
+    console.log("searchWord");
+    console.log(searchWord);
     const resultQuestionDtoList = questionDtoList.filter((el)=>{
       return ((el.title).includes(searchWord));
     });
@@ -142,6 +146,7 @@ export class FormatService {
       title: question.title,
       content: question.content,
       createdDate: this.dateToString(question.createdDate),
+      numLike:question.numLike,
       userEmail:question.user.id,
       userName:(await this.userRepository.findOne({ 
         where:{
@@ -159,6 +164,7 @@ export class FormatService {
         title: el.title,
         content: el.content,
         createdDate: this.dateToString(el.createdDate),
+        numLike:el.numLike,
         userEmail:el.user.id,
         userName:(await this.userRepository.findOne({ 
           where:{
@@ -176,6 +182,7 @@ export class FormatService {
       title: answer.title,
       content: answer.content,
       createdDate: this.dateToString(answer.createdDate),
+      numLike:answer.numLike,
       questionId:answer.question.id,
       questionTitle:(await this.questionRepository.findOne({ 
         where:{
@@ -198,6 +205,7 @@ export class FormatService {
         title: el.title,
         content: el.content,
         createdDate: this.dateToString(el.createdDate),
+        numLike:el.numLike,
         questionId:el.question.id,
         questionTitle:(await this.questionRepository.findOne({ 
           where:{

@@ -3,8 +3,10 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { AComment } from './domain/AComment';
+import { ALike } from './domain/ALike';
 import { Answer } from './domain/Answer';
 import { QComment } from './domain/QComment';
+import { QLike } from './domain/QLike';
 import { Question } from './domain/Question';
 import { User } from './domain/User';
 import { ManageModule } from './manage.module';
@@ -19,7 +21,7 @@ import { LoggerMiddleware } from './utils/logger.middleware';
     username: 'root',
     password: '',
     database: 'mcw4',
-    entities: [User, Question, Answer, QComment, AComment],
+    entities: [User, Question, Answer, QComment, AComment, QLike, ALike],
     synchronize: true,
   }),
      ManageModule],

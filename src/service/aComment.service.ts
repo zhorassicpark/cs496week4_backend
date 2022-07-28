@@ -15,7 +15,7 @@ export class ACommentService {
   }
   /*** answer Comment 리스트 조회   */
    async findAll(): Promise<AComment[]> {
-    return this.aCommentRepository.find({      
+    return await this.aCommentRepository.find({      
       loadRelationIds: {
         relations: [
           'user',
@@ -30,7 +30,7 @@ export class ACommentService {
    * @param id
    */
   async findOne(id: number): Promise<AComment> {
-    return this.aCommentRepository.findOne({ 
+    return await this.aCommentRepository.findOne({ 
       loadRelationIds: {
         relations: [
           'user',

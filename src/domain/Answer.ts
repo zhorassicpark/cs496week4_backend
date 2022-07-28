@@ -1,6 +1,7 @@
 import { group } from 'console';
 import { BaseEntity, Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryColumn, PrimaryGeneratedColumn, Unique } from 'typeorm/index';
 import { AComment } from './AComment';
+import { ALike } from './ALike';
 import { Question } from './Question';
 import { User } from './User';
 
@@ -16,6 +17,8 @@ export class Answer extends BaseEntity{
   content: string;
   @Column({ nullable:true })
   createdDate: Date;
+  @Column({ nullable:true })
+  numLike: number;
   
   //   Many To One References
   @ManyToOne(type => User, user => user.answers)
@@ -31,4 +34,9 @@ export class Answer extends BaseEntity{
     eager: true
   })
   aComments: AComment[];
+  @OneToMany(type=>ALike, aLike => aLike.answer, {
+    onDelete:'CASCADE',
+    eager: true
+  })
+  aLikes: ALike[];
 }

@@ -3,6 +3,7 @@ export class AnswerDto{
   title : string;
   content : string;
   createdDate : string;
+  numLike: number;
   questionId : number;
   questionTitle: string;
   userEmail: string;

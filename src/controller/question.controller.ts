@@ -34,22 +34,26 @@ export class QuestionController {
     const questionList = await this.questionService.findAll();
     console.log(questionList);
     const questionDtoList:QuestionDto[] = await this.formatService.questionListToQuestionDtoList(questionList);
+    const sortedQuestionDtoList:QuestionDto[] = questionDtoList.sort((a, b)=> (a.numLike < b.numLike)?1:-1);
     return Object.assign({
-      data: questionDtoList,
+      data: sortedQuestionDtoList,
       statusCode: 200,
       statusMsg: `질문 목록 조회가 성공적으로 완료되었습니다.`,
     });
   }
 
-  @Get('list/search')                                                                       //  검색어를 포함한 질문 목록 조회
-  async searchQuestionWithWord(@Query() query):Promise<Question[]>{
+  @Get('list/search/:searchWord')                                                                       //  검색어를 포함한 질문 목록 조회
+  async searchQuestionWithWord(@Param('searchWord') searchWord):Promise<Question[]>{
     const questionList = await this.questionService.findAll();
     const questionDtoList:QuestionDto[] = await this.formatService.questionListToQuestionDtoList(questionList);
-    const filteredQuestinDtoList = await this.formatService.questionListFilterWithSearchWord(questionDtoList, query.searchWord);
+    // console.log("body");
+    // console.log(body);
+    
+    const filteredQuestinDtoList = await this.formatService.questionListFilterWithSearchWord(questionDtoList, searchWord);
     return Object.assign({
       data: filteredQuestinDtoList,
       statusCode: 200,
-      statusMsg: `유저의 관심 목록이 성공적으로 조회되었습니다.`,
+      statusMsg: `검색어를 포함하는 질문목록이 조회되었습니다.`,
     });
   }
 
@@ -86,7 +90,7 @@ export class QuestionController {
 
   
   @Get(':questionId')                                                                      //  특정 질문에 대한 상세정보 조회
-  async findQuestion(@Param('questionId') questionId: number):Promise<QuestionDto[]>{
+  async findQuestion(@Param('questionId') questionId: number, @Body() Body):Promise<QuestionDto[]>{
     const question = await this.questionService.findOne(questionId);
     const questionDto:QuestionDto = await this.formatService.questionToQuestionDto(question);
     const response =  Object.assign({
