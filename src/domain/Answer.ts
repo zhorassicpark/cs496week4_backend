@@ -19,6 +19,12 @@ export class Answer extends BaseEntity{
   createdDate: Date;
   @Column({ nullable:true })
   numLike: number;
+  @Column({ nullable:true })
+  imageId: string;
+  @Column({ nullable:true })
+  tagId: string;
+  @Column({ nullable:true })
+  language: string;
   
   //   Many To One References
   @ManyToOne(type => User, user => user.answers)

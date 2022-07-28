@@ -125,6 +125,14 @@ export class AnswerController {
     return response;
   }
 
+  @Put('setdocker')
+  async setDockerImageForAnswer(@Body() body){
+    const updateAnswer = await this.answerService.findOne(body.answerId);
+    updateAnswer.imageId = body.imageId;
+    updateAnswer.tagId = body.tagId;
+    updateAnswer.language = body.language;
+    await this}
+
 @Post()
 async createAnswer(@Body() body ):Promise<Answer>{
   const answer = await this.formatService.answerGen(body.title, body.content, body.createdDate, body.userId, body.questionId);

@@ -48,7 +48,7 @@ export class QuestionController {
     const questionDtoList:QuestionDto[] = await this.formatService.questionListToQuestionDtoList(questionList);
     // console.log("body");
     // console.log(body);
-    
+
     const filteredQuestinDtoList = await this.formatService.questionListFilterWithSearchWord(questionDtoList, searchWord);
     return Object.assign({
       data: filteredQuestinDtoList,
@@ -101,6 +101,15 @@ export class QuestionController {
     console.log("RESPONSE : ");
     console.log(response);
     return response;
+  }
+
+  @Put('setdocker')
+  async setDockerImageForQuestion(@Body() body){
+    const updateQuestion = await this.questionService.findOne(body.questionId);
+    updateQuestion.imageId = body.imageId;
+    updateQuestion.tagId = body.tagId;
+    updateQuestion.language = body.language;
+    await this.questionService.saveQuestion(updateQuestion);
   }
 
 @Post()
